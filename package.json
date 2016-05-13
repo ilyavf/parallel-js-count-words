@@ -1,0 +1,11 @@
+{
+  "name": "parallel-js-count-words",
+  "version": "1.0.0",
+  "description": "Try out webworkers for a simple mapReduce task of counting words on a list of fetched webpages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "IlyaVF",
+  "license": "ISC"
+}

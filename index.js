@@ -13,21 +13,16 @@ var URLs = [
 ];
 
 function main(){
-  asyncMapReduce(fetchAndCount, sortByCount, URLs).then(res => {
-    console.log('asyncMapReduce', res);
+  mapReduce(fetchAndCount, sortByCount, URLs).then(res => {
+    console.log('asyncMapReduce: \n' + res);
   });
 }
 
-// sync:
-function mapReduce(fn1, fn2, list){
-  return list.map(fn1).reduce(fn2);
-}
-
-//async:
-function asyncMapReduce(fn1, fn2, list){
+// mapReduce :: (a -> promise<b>) -> ([b] -> promise<c>) -> [a] -> promise<c>
+function mapReduce(mapper, reducer, list){
   return new Promise((resolve, reject) => {
-    Promise.all(list.map(fn1)).then(results => {
-      resolve(results.reduce(fn2));
+    Promise.all(list.map(mapper)).then(results => {
+      reducer(results).then(resolve);
     });
   });
 }
@@ -50,6 +45,19 @@ function fetchAndCount(url){
   });
 }
 
-function sortByCount(acc, list){
+// sortByCount :: [b] -> promise<c>
+function sortByCount(list){
+  return new Promise((resolve, reject) => {
+    resolve(
+      list.sort((a, b) => { return a.count < b.count ? 1 : (a.count > b.count ? -1 : 1)})
+        .map(a => `${a.count}:${a.url}`)
+        .join(', \n')
+    );
+  });
+}
 
+// generateWord :: () -> string
+function generateWord(){
+  let words = ['hello','world','foo','bar','baz'];
+  return words[Math.round(Math.random()*10) % words.length];
 }

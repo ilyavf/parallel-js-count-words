@@ -1,9 +1,9 @@
-const Task = require('data.task');
+const Task = require('data.task')
 const { List } = require('immutable-ext')
-const execTask = require('./exec');
-const fs = require('fs');
+const execTask = require('./exec')
+const fs = require('fs')
 
-const arr = [1,2,3]
+const arr = [1, 2, 3]
 
 const list = List(arr)
 
@@ -13,4 +13,4 @@ const task = a => {
   return Task.of(a * 2)
 }
 
-execTask( list.traverse(Task.of, task) )
+execTask(list.traverse(Task.of, task))

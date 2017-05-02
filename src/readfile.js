@@ -1,8 +1,8 @@
-const Task = require('data.task');
+const Task = require('data.task')
 const futurize = require('futurize').futurize(Task)
 const { List } = require('immutable-ext')
-const execTask = require('./exec');
-const fs = require('fs');
+const execTask = require('./exec')
+const fs = require('fs')
 
 const readFile = futurize(fs.readFile)
 const files = [

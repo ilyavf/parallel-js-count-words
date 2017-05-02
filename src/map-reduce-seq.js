@@ -1,11 +1,17 @@
 /**
  * Sequential map-reduce (synchronous)
+ *
  * @param Function mapper
  * @param Function reducer
- * @param Array arr Input arrayt data
+ * @param Array arr Input array data
+ *
+ * TYPES:
+ *    Mapper a b :: a -> b
+ *    Reducer a b :: b -> a -> b
+ *    Input a :: List a
  */
 
-// map_reduce_seq :: Mapper -> Reducer -> Input
+// map_reduce_seq :: Mapper a b -> Reducer c b -> Input c
 const map_reduce_seq = (mapper, reducer, arr) =>
   reduce_seq(reducer, mapper_seq(mapper, arr))
 

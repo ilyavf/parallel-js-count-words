@@ -1,7 +1,7 @@
 const Task = require('data.task')
 
-// mapper :: List a -> (a -> Task b) -> Task List b
-const mapper = (list, fTask) =>
+// mapAsync :: (a -> Task b) -> List a -> Task List b
+const mapAsync = (fTask, list) =>
   list.traverse(Task.of, fTask)
 
-module.exports = mapper
+module.exports = mapAsync

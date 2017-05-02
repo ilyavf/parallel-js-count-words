@@ -1,7 +1,7 @@
 const Task = require('data.task')
 
 // asyncSum :: Number -> Number -> Task Number
-const asyncSum = a => b => Task.of(a + b)
+// const asyncSum = a => b => Task.of(a + b)
 
 // reducer :: (b -> a -> Task b) -> a -> List a -> Task b
 const reducer = fn => initialValue => list =>

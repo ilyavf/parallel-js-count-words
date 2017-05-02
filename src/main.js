@@ -1,20 +1,17 @@
 const Task = require('data.task')
 const { List } = require('immutable-ext')
 const execTask = require('./exec')
+const mapper = require('./mapper')
+// const log = require('./logger')
 
-// log :: a -> a
-const log = a => {
-  console.log('log: ', a)
-  return a
-}
 
-// getPage :: String -> Task(String)
-const getPage = url => Task.of('some text here')
+// getPage :: String -> Task String
+const getPage = url => Task.of(url)
 
-// countWords :: String -> Task(Number)
-const countWords = text => Task.of(text.split(' ').length)
+// countWords :: String -> Task Number
+const countWords = text => Task.of(text.split('').length)
 
-// appCount :: String -> Task(Number)
+// appCount :: String -> Task Number
 const appCount = url =>
   getPage(url)
   .chain(countWords)
@@ -24,11 +21,11 @@ const urls = List([
   'http://ya.ru'
 ])
 
-// mapper :: Array(String) -> (String -> Task(Number)) -> Task(Array(Number))
-const mapper = (list, fTask) =>
-  list.traverse(Task.of, fTask)
+// calcSum :: Number -> Number -> Task Number
+const calcSum = a => b => Task.of(a + b)
 
 // MAIN APP:
 const app = mapper(urls, appCount)
+  .chain(reducer(calcSum))
 
 execTask(app)

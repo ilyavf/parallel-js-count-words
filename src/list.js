@@ -7,7 +7,7 @@ const arr = [1, 2, 3]
 
 const list = List(arr)
 
-// task :: a -> Task(a)
+// task :: a -> Task a
 const task = a => {
   console.log('task a: ', a)
   return Task.of(a * 2)

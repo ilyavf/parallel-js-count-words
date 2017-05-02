@@ -11,7 +11,8 @@ const files = [
 ]
 const list = List(files)
 
-// const res = files.map(fileName => execTask(readFile(fileName, 'utf-8')))
+// const res = files.map(fileName => readFile(fileName, 'utf-8'))
+// console.log(res)
 const res = list.traverse(Task.of, readFile)
 
 execTask(res)

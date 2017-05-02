@@ -6,12 +6,12 @@ const map_reduce_seq = (mapper, reducer, arr) =>
 const reduce_seq = (reducer, arr) =>
   arr.reduce(reducer)
 
-const arr = [1, 2, 3]
-
+// mapperMult :: a -> a
 const mapperMult = el => el * 5
 
+// reducerSum :: a -> a -> a
 const reducerSum = (acc, el) => acc + el
 
+const arr = [1, 2, 3]
 const res = map_reduce_seq(mapperMult, reducerSum, arr)
-
 console.log(res);

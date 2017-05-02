@@ -4,4 +4,8 @@ console.log('Worker app loaded!')
 
 console.log('Task is ' + typeof Task);
 
-postMessage('Hello from Worker!');
+onmessage = function(ev) {
+  console.log('Worker received a message: ',  ev);
+};
+
+postMessage('ready');

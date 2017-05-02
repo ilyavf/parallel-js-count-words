@@ -4,10 +4,10 @@ const Task = require('data.task')
 // ReducerAsync a b = b -> a -> Task b
 
 // reduceAsync :: ReducerAsync b a -> b -> List a -> Task b
-const reduce = reducer => initialValue => list =>
+const reduce = reducer => acc => list =>
   list.size === 0
-    ? Task.of(initialValue)
-    : reducer(initialValue)(list.first()).chain(a => reduce(reducer)(a)(list.shift()))
+    ? Task.of(acc)
+    : reducer(acc)(list.first()).chain(a => reduce(reducer)(a)(list.shift()))
 
 // reduceAsync :: ReducerAsync b a -> Task List a -> Task b
 reduceAsync = (reducer, listTask) =>

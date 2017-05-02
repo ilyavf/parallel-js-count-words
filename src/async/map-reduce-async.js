@@ -14,5 +14,7 @@ const mapAsync = require('./map-async')
 const reduceAsync = require('./reduce-async')
 
 // mapReduceAsync :: Mapper -> Reducer -> Input
-const mapReduceAsync = (mapper, reducer, arr) =>
-  reduceAsync(reducer, mapAsync(mapper))
+const mapReduceAsync = (mapper, reducer, list) =>
+  reduceAsync(reducer, mapAsync(mapper, list))
+
+module.exports = mapReduceAsync

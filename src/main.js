@@ -1,35 +1,49 @@
 const Task = require('data.task');
+// const futurize = require('futurize').futurize(Task)
+const { List } = require('immutable-ext')
+const execTask = require('./exec')
 
-// toTask :: a -> Task(a)
-const toTask = (result = 'mocked task') => new Task((rej, res) => res(result))
+// log :: a -> a
+const log = a => {
+  console.log('log: ', a)
+  return a
+}
 
 // getPage :: String -> Task(String)
-const getPage = url => toTask('some text here')
+const getPage = url => Task.of('some text here')
 
 // countWords :: String -> Task(Number)
-const countWords = text => toTask(text.split(' ').length)
+const countWords = text => Task.of(text.split(' ').length)
 
 let url = 'http://google.com'
 
 // appCount :: String -> Task(Number)
 const appCount = url =>
   getPage(url)
+  .map(log)
   .chain(countWords)
 
-// execTask :: Task(a) -> IO()
-const execTask = t =>
-  t.fork(e => console.log('error: ', e),
-    x => console.log('x: ', x))
+// execTask(appCount(url))
 
-execTask(appCount(url))
-
-const urls = [
+const urls = List([
   'http://google.com',
   'http://ya.ru'
-]
+])
+
+execTask(urls.traverse(Task.of, a => {
+  console.log('a: ', a)
+  return Task.of(a)
+}))
+// execTask(urls.traverse(Task.of, a => {
+//   console.log('a: ', a)
+//   return appCount(a)
+// }))
 
 // mapper :: Array(String) -> (String -> Task(Number)) -> Task(Array(Number))
-const mapper = (arr, func) =>
-  arr.map(func)
+const mapper = (list, fTask) =>
+  list.traverse(Task.of, fTask)
 
+// MAIN APP:
 const app = mapper(urls, appCount)
+
+// execTask(app)

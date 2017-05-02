@@ -10,10 +10,10 @@ const reducer = require('./reducer')
 // PageRank = Object { url:String, rank:Number }
 
 // getPage :: String -> Task Page
-const getPage = url => Task.of({ url, text: url.replace(/[plrc]/, ' ')})
+const getPage = url => Task.of({url, text: url.replace(/[plrc]/, ' ')})
 
 // countWords :: Page -> Task PageRank
-const countWords = page => Task.of({ url: page.url, rank: page.text.split('').length })
+const countWords = page => Task.of({url: page.url, rank: page.text.split('').length})
 
 // pageRank :: String -> Task PageRank
 const pageRank = url =>

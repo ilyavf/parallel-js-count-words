@@ -27,13 +27,13 @@ function mapReduce (mapper, reducer, list) {
   })
 }
 
-function asyncMap (fn, list) {
-
-}
-
-function parMap () {
-
-}
+// function asyncMap (fn, list) {
+//
+// }
+//
+// function parMap () {
+//
+// }
 
 // fetchAndCount :: string -> promise<string,integer>
 function fetchAndCount (url) {
@@ -61,3 +61,7 @@ function generateWord () {
   let words = ['hello', 'world', 'foo', 'bar', 'baz']
   return words[Math.round(Math.random() * 10) % words.length]
 }
+
+main()
+
+module.exports.generateWord = generateWord

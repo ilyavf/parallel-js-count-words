@@ -1,4 +1,4 @@
-const Task = require('data.task');
+const Task = require('data.task')
 
 // mapper :: List a -> (a -> Task b) -> Task List b
 const mapper = (list, fTask) =>

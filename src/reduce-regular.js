@@ -1,6 +1,6 @@
 // asyncSum :: Num -> Num -> Promise
-function asyncSum (acc, a){
-  return new Promise(function(resolve, reject){
+function asyncSum (acc, a) {
+  return new Promise(function (resolve, reject) {
     resolve(acc + a)
   })
 }
@@ -15,5 +15,4 @@ let reduce = (arr, asyncFn, initValue) =>
       a => reduce(arr.slice(1, arr.length), asyncFn, a)
     )
 
-reduce([1], asyncSum, 0).then(a => console.log('Result: ' + a))
-
+reduce(arr, asyncSum, 0).then(a => console.log('Result: ' + a))

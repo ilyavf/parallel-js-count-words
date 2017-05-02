@@ -1,6 +1,6 @@
 const Task = require('data.task')
 const { List } = require('immutable-ext')
-const execTask = require('./exec')
+const execTask = require('../helpers/exec')
 
 const arr = [1, 2, 3]
 

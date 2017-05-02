@@ -1,23 +1,23 @@
 const Task = require('data.task')
 const { List } = require('immutable-ext')
-const execTask = require('./exec')
-const mapper = require('./mapper')
-const reducer = require('./reducer')
+const execTask = require('../helpers/exec')
+const mapper = require('./map-async')
+const reduceAsync = require('./reduce-async')
 // const log = require('./logger')
 
 // TYPES:
 // Page = Object { url:String, text:String }
 // PageRank = Object { url:String, rank:Number }
 
-// getPage :: String -> Task Page
-const getPage = url => Task.of({url, text: url.replace(/[plrc]/, ' ')})
+// fetchPage :: String -> Task Page
+const fetchPage = url => Task.of({url, text: url.replace(/[plrc]/, ' ')})
 
 // countWords :: Page -> Task PageRank
 const countWords = page => Task.of({url: page.url, rank: page.text.split('').length})
 
 // pageRank :: String -> Task PageRank
 const pageRank = url =>
-  getPage(url)
+  fetchPage(url)
   .chain(countWords)
 
 const urls = List([
@@ -35,6 +35,6 @@ const app = mapper(urls, pageRank)
     pageRanks.map(pageRank => console.log(pageRank.rank))
     return pageRanks
   })
-  .chain(reducer(calcSum)(0))
+  .chain(reduceAsync(calcSum)(0))
 
 execTask(app)

@@ -1,8 +1,8 @@
 const Task = require('data.task')
 const { List } = require('immutable-ext')
-const execTask = require('./exec')
-const mapper = require('./mapper')
-const reducer = require('./reducer')
+const execTask = require('../helpers/exec')
+const mapper = require('./map-async')
+const reduceAsync = require('./reduce-async')
 // const log = require('./logger')
 
 // TYPES:
@@ -35,6 +35,6 @@ const app = mapper(urls, pageRank)
     pageRanks.map(pageRank => console.log(pageRank.rank))
     return pageRanks
   })
-  .chain(reducer(calcSum)(0))
+  .chain(reduceAsync(calcSum)(0))
 
 execTask(app)

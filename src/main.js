@@ -2,6 +2,7 @@ const Task = require('data.task')
 const { List } = require('immutable-ext')
 const execTask = require('./exec')
 const mapper = require('./mapper')
+const reducer = require('./reducer')
 // const log = require('./logger')
 
 
@@ -20,12 +21,13 @@ const urls = List([
   'http://google.com',
   'http://ya.ru'
 ])
+// const urls = List([])
 
 // calcSum :: Number -> Number -> Task Number
 const calcSum = a => b => Task.of(a + b)
 
 // MAIN APP:
 const app = mapper(urls, appCount)
-  .chain(reducer(calcSum))
+  .chain(reducer(calcSum)(0))
 
 execTask(app)

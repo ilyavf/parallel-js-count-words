@@ -1,16 +1,16 @@
-function makeWorker(){
-  return new Worker(System.stealURL + "?main=src/try-webworker/worker");
+function makeWorker () {
+  return new window.Worker(System.stealURL + '?main=src/try-webworker/worker')
 }
 
-const w1 = makeWorker();
-const w2 = makeWorker();
+const w1 = makeWorker()
+const w2 = makeWorker()
 
-w1.onmessage = function(ev) {
-  console.log('Worker 1 said: ', ev.data);
-  if (ev.data === 'ready'){
+w1.onmessage = function (ev) {
+  console.log('Worker 1 said: ', ev.data)
+  if (ev.data === 'ready') {
     w1.postMessage('hey worker 1!')
   }
 }
-w2.onmessage = function(event) {
-  console.log('Worker 2 said: ', event.data);
+w2.onmessage = function (event) {
+  console.log('Worker 2 said: ', event.data)
 }

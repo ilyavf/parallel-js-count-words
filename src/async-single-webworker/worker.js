@@ -1,6 +1,9 @@
-const Task = require('data.task');
+/* eslint-env serviceworker */
 
-onmessage = function (ev) {
+const Task = require('data.task')
+
+// Note: self is worker's `DedicatedWorkerGlobalScope`.
+self.onmessage = function (ev) {
   switch (ev.data.type) {
     case 'runTask':
       runTask(ev.data.taskUrl, ev.data.taskData)
@@ -12,7 +15,7 @@ const runTask = (url, data) =>
   loadModule(url)
   .chain(m => m(data))
   .fork(e => console.log(e),
-        result => postMessage({
+        result => self.postMessage({
           type: 'taskResult',
           result
         })
@@ -21,7 +24,7 @@ const runTask = (url, data) =>
 // loadModule :: String -> Task m
 const loadModule = url =>
   new Task((reject, resolve) =>
-    steal.import(url).then(resolve)
+    self.steal.import(url).then(resolve)
   )
 
-postMessage('ready')
+self.postMessage('ready')

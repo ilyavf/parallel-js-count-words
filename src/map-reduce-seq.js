@@ -11,16 +11,12 @@
  *    Input a :: List a
  */
 
-// map_reduce_seq :: Mapper a b -> Reducer c b -> Input c
-const map_reduce_seq = (mapper, reducer, arr) =>
-  reduce_seq(reducer, mapper_seq(mapper, arr))
-
-// mapper_seq :: (a -> b) -> List a -> List b
-mapper_seq = (mapper, arr) =>
+// mapperSeq :: (a -> b) -> List a -> List b
+const mapperSeq = (mapper, arr) =>
   arr.map(mapper)
 
-// reduce_seq :: Reducer a b -> List a -> b
-const reduce_seq = (reducer, arr) =>
+// reduceSeq :: Reducer a b -> List a -> b
+const reduceSeq = (reducer, arr) =>
   arr.reduce(reducer)
 
 // mapperMult :: a -> a
@@ -29,6 +25,10 @@ const mapperMult = el => el * 5
 // reducerSum :: a -> a -> a
 const reducerSum = (acc, el) => acc + el
 
+// mapReduceSeq :: Mapper a b -> Reducer c b -> Input c
+const mapReduceSeq = (mapper, reducer, arr) =>
+  reduceSeq(reducer, mapperSeq(mapper, arr))
+
 const arr = [1, 2, 3]
-const res = map_reduce_seq(mapperMult, reducerSum, arr)
-console.log(res);
+const res = mapReduceSeq(mapperMult, reducerSum, arr)
+console.log(res)

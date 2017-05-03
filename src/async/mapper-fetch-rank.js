@@ -9,7 +9,7 @@ const simulateCalculation = require('../helpers/simulate-calc')
 const fetchPage = url =>
   // Task.of({url, text: url.replace(/[plrc]./g, ' ')})
   new Task((reject, resolve) => {
-    simulateCalculation(2);
+    simulateCalculation(1);
     console.log('- resolving for ' + url);
     resolve({url, text: url.replace(/[plrc]./g, ' ')})
   })

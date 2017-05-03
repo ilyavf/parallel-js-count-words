@@ -10,6 +10,6 @@ const list = List([
   'http://ya.ru'
 ])
 
-const app = mapReduceAsync(a => mapper(a).map(log('map')), reducer, list)
+const app = mapReduceAsync(mapper, reducer, list)
 
 execTask(app)

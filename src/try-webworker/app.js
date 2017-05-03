@@ -1,5 +1,5 @@
 function makeWorker(){
-  return worker = new Worker(System.stealURL + "?main=src/try-webworker/worker");
+  return new Worker(System.stealURL + "?main=src/try-webworker/worker");
 }
 
 const w1 = makeWorker();

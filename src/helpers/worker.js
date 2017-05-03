@@ -5,8 +5,8 @@ const create =  url =>
   new Task((reject, resolve) => {
     const worker = new window.Worker(System.stealURL + '?main=' + url)
     worker.onmessage = ev => {
-      ev.data === 'ready'
-      resolve(worker)
+      if (ev.data === 'ready')
+        resolve(worker)
     }
   })
 

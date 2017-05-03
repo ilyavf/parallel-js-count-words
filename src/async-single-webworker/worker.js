@@ -7,6 +7,12 @@ self.onmessage = function (ev) {
   switch (ev.data.type) {
     case 'runTask':
       runTask(ev.data.taskUrl, ev.data.taskData)
+      break
+    case 'ping':
+      self.postMessage('pong')
+      break
+    default:
+      console.log('Worker: not sure what to do with this task: ' + ev.data.type, ev.data);
   }
 }
 

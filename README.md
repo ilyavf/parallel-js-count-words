@@ -19,3 +19,9 @@ Plan:
 - primitives:
     - createWebworker
 
+
+
+Modules:
+- Main module: `worker-map-reduce`
+- Web worker task runner: `worker-task-runner`
+  - make two versions: Task and Promise based
